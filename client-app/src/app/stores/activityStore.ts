@@ -2,7 +2,6 @@ import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agents";
 import { Activity } from "../models/activity";
 import { v4 as uuid } from "uuid";
-import { act } from "@testing-library/react";
 
 export default class ActivityStore {
   activityRegistry = new Map<string, Activity>()
@@ -17,8 +16,20 @@ export default class ActivityStore {
   }
 
   get activitiesByDate() {
-    return Array.from(this.activityRegistry.values()).sort((a,b) => 
+    return Array.from(this.activityRegistry.values())
+      .sort((a,b) => 
         Date.parse(a.date) - Date.parse(b.date))
+  }
+
+  // group the activities by date
+  get groupedActivities() {
+    return Object.entries(
+      this.activitiesByDate.reduce((activities, activity) => {
+        const date = activity.date;
+        activities[date] = activities[date] ? [...activities[date], activity] : [activity];
+        return activities;        
+      }, {} as {[key: string]: Activity[]})
+    )
   }
 
   loadActivities = async () => {
@@ -58,12 +69,9 @@ export default class ActivityStore {
   }
 
   private setActivity = (activity: Activity) => {
-    
     activity.date = activity.date.split("T")[0];
     this.activityRegistry.set(activity.id, activity);
   }
-
-
 
   private getActivity = (id: string) => {
     return this.activityRegistry.get(id)
@@ -72,7 +80,6 @@ export default class ActivityStore {
   setLoadingInitial = (state: boolean) => {
     this.loadingInitial = state;
   };
-
 
   createActivity = async (activity: Activity) => {
     this.loading = true;
