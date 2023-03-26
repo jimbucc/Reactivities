@@ -18,7 +18,7 @@ const ActivityDashboard = () => {
 
   
   // Show loading component if data is not available
-  if(activityStore.loadingInitial) return <LoadingComponent content='Loading app'/>
+  if(activityStore.loadingInitial) return <LoadingComponent content='Loading activities'/>
 
   return (
     <Grid>

@@ -5,6 +5,7 @@ import ActivityForm from "../../features/activities/form/ActivityForm";
 import NotFound from "../../features/errors/NotFound";
 import ServerError from "../../features/errors/ServerError";
 import TestErrors from "../../features/errors/TestError";
+import LoginForm from "../../users/LoginForm";
 import App from "../layout/App";
 
 export const routes: RouteObject[] = [
@@ -16,6 +17,7 @@ export const routes: RouteObject[] = [
             { path: 'activities/:id', element: <ActivityDetails /> },
             { path: 'createActivity', element: <ActivityForm key='create'/> },  // different keys will make React reset the state
             { path: 'manage/:id', element: <ActivityForm key='manage'/> },       // for the same view
+            { path: 'login', element: <LoginForm /> },       
             { path: 'errors', element: <TestErrors /> },       
             { path: 'not-found', element: <NotFound /> },   
             { path: 'server-error', element: <ServerError /> },   
