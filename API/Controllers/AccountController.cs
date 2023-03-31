@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Security.Claims;
 using API.DTOs;
 using API.Services;
