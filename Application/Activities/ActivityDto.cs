@@ -1,6 +1,3 @@
-using System;
-using Application.Profiles;
-
 namespace Application.Activities
 {
     public class ActivityDto

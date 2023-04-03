@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Application.Core;
 using Application.Interfaces;
 using Domain;
@@ -48,7 +44,7 @@ namespace Application.Activities
                 var attendance = activity.Attendees.FirstOrDefault(x => x.AppUser.UserName == user.UserName);
 
                 if(attendance != null && hostUsername == user.UserName)
-                activity.IsCancelled = !activity.IsCancelled;
+                    activity.IsCancelled = !activity.IsCancelled;
 
                 if(attendance != null && hostUsername != user.UserName)
                     activity.Attendees.Remove(attendance);
